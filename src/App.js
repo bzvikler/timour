@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import { Header } from './components/common';
 import StartScreen from './components/StartScreen';
+import JoinScreen from './components/JoinScreen';
+import CreateScreen from './components/CreateScreen';
+import SessionScreen from './components/SessionScreen';
 import './App.css';
 
 class App extends Component {
     render() {
         return (
-            <BrowserRouter>
+            <HashRouter>
                 <div>
                     <Header title="time-our" />
                     <Switch>
-                        <Route path='/' component={StartScreen} />
-                        {/* <Route path='/roster' component={Roster} />
-                    <Route path='/schedule' component={Schedule} /> */}
+                        <Route exact path='/' component={StartScreen} />
+                        <Route exact path='/join' component={JoinScreen} />
+                        <Route exact path='/create' component={CreateScreen} />
+                        <Route exact path='/session' component={SessionScreen} />
                     </Switch>
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         );
     }
 }
