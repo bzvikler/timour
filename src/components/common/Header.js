@@ -1,12 +1,13 @@
 import React from 'react';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
 const Header = (props) => {
     return (
-        <div className="Header-container">
-            <p className="Header-text">
-                {props.title}
-            </p>
-        </div>
+        <Toolbar style={{justifyContent: 'center'}}>
+            <ToolbarGroup>
+                <h2>{props.title}</h2>
+            </ToolbarGroup>
+        </Toolbar>
     );
 }
 

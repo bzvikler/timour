@@ -1,33 +1,31 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { navCreateRoom, navJoinRoom } from '../actions/NavActions';
+import { loginUser } from '../actions/AuthActions';
 import { Button } from './common';
 
 class StartScreen extends Component {
     startSession() {
-        console.log('hey');
+        this.props.loginUser();
     }
 
     joinSession() {
-
+        this.props.navJoinRoom();
     }
 
     render() {
         return (
             <div className="Screen-container">
-                <Link to='/create'>
-                    <Button onClick={this.startSession.bind(this)}>
-                        Start a Session
-                    </Button>
-                </Link>
+                <Button text="Create a Playlist" onClick={this.startSession.bind(this)} />
                 <p>Or</p>
-                <Link to="/join">
-                    <Button onClick={this.joinSession.bind(this)}>
-                        Join a Session
-                    </Button>
-                </Link>
+                <Button text="Suggest a Song" onClick={this.joinSession.bind(this)} />
             </div>
         );
     }
 }
 
-export default StartScreen;
+export default connect(null, {
+    navCreateRoom,
+    navJoinRoom,
+    loginUser
+})(StartScreen);

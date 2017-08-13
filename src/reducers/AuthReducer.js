@@ -1,14 +1,19 @@
 import {
+    LOGIN_USER,
+    LOGIN_USER_SUCCESS,
+    LOGIN_USER_FAIL
 } from '../actions/types';
 
 const INITIAL_STATE = {
-    authenticated: false
+    user: null,
+    isLogginIn: false,
+    isLoggedIn: false
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case 'foo':
-            return { ...state, email: action.payload };
+        case LOGIN_USER_SUCCESS:
+            return { ...state, user: action.payload, isLoggedIn: true, };
         default:
             return state;
     }

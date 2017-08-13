@@ -1,44 +1,28 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import reducers from './reducers'
-import { routerMiddleware, push } from 'react-router-redux';
+import { routerMiddleware } from 'react-router-redux';
 import { createHashHistory } from 'history';
-import { Header } from './components/common';
-import StartScreen from './components/StartScreen';
-import JoinScreen from './components/JoinScreen';
-import CreateScreen from './components/CreateScreen';
-import SessionScreen from './components/SessionScreen';
-import './App.css';
+import AuthService from './services/AuthService';
+import Root from './components/Root';
 
 class App extends Component {
-    render() {
+    componentWillMount() {
+        AuthService.initApp();
+    }
 
-        // Apply the middleware to the store
+    render() {
         const middleware = routerMiddleware(createHashHistory())
         const store = createStore(
             reducers,
-            applyMiddleware(middleware)
+            applyMiddleware(middleware, thunk)
         )
 
-        // Dispatch from anywhere like normal.
-        store.dispatch(push('/create'))
-        // const store = createStore(reducers);
-
         return (
-            <Provider store={this.store}>
-                <HashRouter>
-                    <div>
-                        <Header title="time-our" />
-                        <Switch>
-                            <Route exact path='/' component={StartScreen} />
-                            <Route exact path='/join' component={JoinScreen} />
-                            <Route exact path='/create' component={CreateScreen} />
-                            <Route exact path='/session' component={SessionScreen} />
-                        </Switch>
-                    </div>
-                </HashRouter>
+            <Provider store={store}>
+                <Root />
             </Provider>
         );
     }

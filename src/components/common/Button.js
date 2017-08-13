@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 
-class Button extends Component {
-    render() {
-        return (
-            <button
-                className="Button"
-                onClick={this.props.onClick}
-            >
-                {this.props.children}
-            </button>
-        );
-    }
+const Button = ({ text, onClick }) => {
+    return (
+        <RaisedButton label={text} onClick={onClick} />
+    );
 };
 
 export { Button };

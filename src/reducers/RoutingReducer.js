@@ -1,14 +1,16 @@
 import {
+    NAV_CREATE_ROOM,
+    NAV_JOIN_ROOM
 } from '../actions/types';
 
 const INITIAL_STATE = {
-    authenticated: false
+    navTitle: 'Qllaborate'
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case 'foo':
-            return { ...state, email: action.payload };
+        case NAV_CREATE_ROOM:
+            return { ...state, navTitle: action.payload };
         default:
             return state;
     }

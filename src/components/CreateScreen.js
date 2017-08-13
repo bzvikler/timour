@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Button } from './common';
 
 class StartScreen extends Component {
@@ -11,4 +12,12 @@ class StartScreen extends Component {
     }
 }
 
-export default StartScreen;
+const mapStateToProps = ({ auth }) => {
+    const { user } = auth;
+
+    return {
+        user
+    };
+};
+
+export default connect(mapStateToProps, {})(StartScreen);
