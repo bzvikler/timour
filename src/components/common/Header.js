@@ -5,7 +5,7 @@ const Header = (props) => {
     return (
         <Toolbar style={{justifyContent: 'center'}}>
             <ToolbarGroup>
-                <h2>{props.title}</h2>
+                <ToolbarTitle text={props.title}/>
             </ToolbarGroup>
         </Toolbar>
     );

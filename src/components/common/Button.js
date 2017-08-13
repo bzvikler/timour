@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
-const Button = ({ text, onClick }) => {
+const Button = ({ text, onClick, style }) => {
     return (
-        <RaisedButton label={text} onClick={onClick} />
+        <RaisedButton style={style} label={text} onClick={onClick} />
     );
 };
 

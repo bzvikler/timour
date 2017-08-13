@@ -23,6 +23,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "eslint-config-rallycoding": "^3.2.0",
     "redux-devtools": "^3.4.0"
   }
 }

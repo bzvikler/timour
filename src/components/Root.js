@@ -6,7 +6,7 @@ import { Header } from './common';
 import StartScreen from './StartScreen';
 import JoinScreen from './JoinScreen';
 import CreateScreen from './CreateScreen';
-import SessionScreen from './SessionScreen';
+import PlaylistScreen from './PlaylistScreen';
 import '../App.css';
 
 class Root extends Component {
@@ -20,7 +20,7 @@ class Root extends Component {
                             <Route exact path='/' component={StartScreen} />
                             <Route exact path='/join' component={JoinScreen} />
                             <Route exact path='/create' component={CreateScreen} />
-                            <Route exact path='/session' component={SessionScreen} />
+                            <Route exact path='/playlist/:id' component={PlaylistScreen} />
                         </Switch>
                     </div>
                 </MuiThemeProvider>
@@ -31,7 +31,6 @@ class Root extends Component {
 
 const mapStateToProps = ({ routing }) => {
     const { navTitle } = routing;
-    console.log(navTitle);
     return {
         navTitle
     }
