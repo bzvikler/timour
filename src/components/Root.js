@@ -6,6 +6,7 @@ import { Header } from './common';
 import StartScreen from './StartScreen';
 import JoinScreen from './JoinScreen';
 import CreateScreen from './CreateScreen';
+import ConfirmScreen from './ConfirmScreen';
 import PlaylistScreen from './PlaylistScreen';
 import '../App.css';
 
@@ -20,6 +21,7 @@ class Root extends Component {
                             <Route exact path='/' component={StartScreen} />
                             <Route exact path='/join' component={JoinScreen} />
                             <Route exact path='/create' component={CreateScreen} />
+                            <Route exact path='/create/confirm' component={ConfirmScreen} />
                             <Route exact path='/playlist/:id' component={PlaylistScreen} />
                         </Switch>
                     </div>

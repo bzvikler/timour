@@ -11,7 +11,7 @@ import {
     createPlaylist
 } from '../actions/PlaylistActions';
 
-class StartScreen extends Component {
+class CreateScreen extends Component {
     handlePlaylistNameChange(e, text) {
         this.props.playlistNameChange(text);
     }
@@ -38,7 +38,7 @@ class StartScreen extends Component {
 
         return (
             <div className='Screen-container'>
-                <div className='Form-create'>
+                <div className='Form-center'>
                     <TextField
                         floatingLabelText='Playlist Name'
                         onChange={this.handlePlaylistNameChange.bind(this)}
@@ -82,4 +82,4 @@ export default connect(mapStateToProps, {
     djNameChange,
     playlistDateToLiveChange,
     createPlaylist
-})(StartScreen);
+})(CreateScreen);

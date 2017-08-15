@@ -1,4 +1,5 @@
 import PlaylistService from '../services/PlaylistService';
+import { navToConfirm, navToPlaylist } from '../actions/NavActions';
 import {
     PLAYLIST_NAME_CHANGE,
     DJ_NAME_CHANGE,
@@ -37,6 +38,11 @@ export const createPlaylist = ({ playlistName, djName, playlistDateToLive, user 
             user,
             playlistId
         );
+        dispatch({
+            type: CREATE_PLAYLIST,
+            payload: playlistId
+        })
+        dispatch(navToConfirm());
         // should the above call by async?!?!?! why does .then not work?
         // anyway, need to import navActions here and dispatch action of createPlaylistSuccess or something
         // need to pass in playListUrl so it can push /playlists/playlistUrl
