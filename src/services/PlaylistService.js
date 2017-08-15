@@ -5,10 +5,13 @@ const PlaylistService = {
         return firebase.database();
     },
 
-    createPlaylist: (id, user, playlistName, djName) => {
-        firebase.database().ref('playlists/' + id).set({
+    createPlaylist: (playlistName, djName, playlistDateToLive, user, playlistId) => {
+        firebase.database().ref('playlists/' + playlistId).set({
+            userId: user,
             playListName: playlistName,
-            djName: djName
+            djName: djName,
+            dateCreated: new Date().toUTCString(),
+            dateToLive: playlistDateToLive.toUTCString()
         });
     }
 }

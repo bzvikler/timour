@@ -2,6 +2,7 @@ import PlaylistService from '../services/PlaylistService';
 import {
     PLAYLIST_NAME_CHANGE,
     DJ_NAME_CHANGE,
+    PLAYLIST_DATE_TO_LIVE_CHANGE,
     CREATE_PLAYLIST
 } from './types.js';
 
@@ -18,10 +19,24 @@ export const djNameChange = text => {
         payload: text
     };
 };
-export const createPlaylist = ({ playlistName, djName, user }) => {
+
+export const playlistDateToLiveChange = date => {
+    return {
+        type: PLAYLIST_DATE_TO_LIVE_CHANGE,
+        payload: date
+    }
+};
+
+export const createPlaylist = ({ playlistName, djName, playlistDateToLive, user }) => {
     return (dispatch) => {
-        const playlistUrl = Math.random().toString(36).substr(2, 5);
-        PlaylistService.createPlaylist(playlistUrl, user, playlistName, djName)
+        const playlistId = Math.random().toString(36).substr(2, 5);
+        PlaylistService.createPlaylist(
+            playlistName,
+            djName,
+            playlistDateToLive,
+            user,
+            playlistId
+        );
         // should the above call by async?!?!?! why does .then not work?
         // anyway, need to import navActions here and dispatch action of createPlaylistSuccess or something
         // need to pass in playListUrl so it can push /playlists/playlistUrl

@@ -11,6 +11,7 @@ export const loginUser = () => {
         // use the service here to firebase login anon
         AuthService.loginUserAnon()
             .then(user => {
+                console.log(user);
                 loginUserSuccess(dispatch, user);
             })
             .catch(error => {

@@ -8,7 +8,15 @@ const AuthService = {
     },
 
     loginUserAnon: () => {
-        return firebase.auth().signInAnonymously();
+        return new Promise((resolve, reject) => {
+            firebase.auth().signInAnonymously()
+                .then(user => {
+                    resolve(user.uid);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
     }
 }
 
