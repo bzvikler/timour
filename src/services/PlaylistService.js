@@ -13,6 +13,13 @@ const PlaylistService = {
             dateCreated: new Date().toUTCString(),
             dateToLive: playlistDateToLive.toUTCString()
         });
+    },
+
+    postPlaylistEditCode: (playlistId, playlistEditCode) => {
+        console.log(playlistId);
+        firebase.database().ref('playlists/' + playlistId).update({
+            playlistEditCode
+        });
     }
 }
 

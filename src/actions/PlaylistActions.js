@@ -4,7 +4,9 @@ import {
     PLAYLIST_NAME_CHANGE,
     DJ_NAME_CHANGE,
     PLAYLIST_DATE_TO_LIVE_CHANGE,
-    CREATE_PLAYLIST
+    CREATE_PLAYLIST,
+    CONFIRM_PLAYLIST,
+    PLAYLIST_EDIT_CODE_CAHANGE
 } from './types.js';
 
 export const playlistNameChange = text => {
@@ -47,5 +49,18 @@ export const createPlaylist = ({ playlistName, djName, playlistDateToLive, user 
         // anyway, need to import navActions here and dispatch action of createPlaylistSuccess or something
         // need to pass in playListUrl so it can push /playlists/playlistUrl
         // need to dispatch a navAction to change some state like title and such
+    };
+}
+
+export const playlistEditCodeChange = text => {
+    return {
+        type: PLAYLIST_EDIT_CODE_CAHANGE,
+        payload: text
+    }
+}
+
+export const confirmPlaylist = ({ playlistId, playlistEditCode}) => {
+    return (dispatch) => {
+        PlaylistService.postPlaylistEditCode(playlistId, playlistEditCode);
     };
 }

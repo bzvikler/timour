@@ -58,11 +58,14 @@ h2 {
   font-size: 16px;
 }
 
+.Form-button-container {
+  margin-top: 48px;
+}
+
 .Form-center {
   display: flex;
   flex-direction: column;
-  align-content: center;
-  height: 50%;
+  align-items: center;
   text-align: center;
   padding: 24px;
 }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
-import { Button } from './common';
 import { CreateScreenStyles } from '../styles';
 import {
     playlistNameChange,
@@ -12,6 +12,14 @@ import {
 } from '../actions/PlaylistActions';
 
 class CreateScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            playlistDateEntered: false
+        }
+        console.log(this.state);
+    }
+
     handlePlaylistNameChange(e, text) {
         this.props.playlistNameChange(text);
     }
@@ -20,7 +28,10 @@ class CreateScreen extends Component {
         this.props.djNameChange(text);
     }
 
-    handleDateChange(firstParam, date) {
+    handleDateChange(e, date) {
+        this.setState({
+            playlistDateEntered: true
+        });
         this.props.playlistDateToLiveChange(date);
     }
 
@@ -39,13 +50,16 @@ class CreateScreen extends Component {
         return (
             <div className='Screen-container'>
                 <div className='Form-center'>
+                    <h2>Let's get some info for your playlist!</h2>
                     <TextField
                         floatingLabelText='Playlist Name'
+                        hintText="Awesome Playlist"
                         onChange={this.handlePlaylistNameChange.bind(this)}
                         value={this.props.playListName}
                     />
                     <TextField
                         floatingLabelText='DJ Name'
+                        hintText="DJ Awesome"
                         onChange={this.handleDjNameChange.bind(this)}
                         value={this.props.djName}
                     />
@@ -54,11 +68,14 @@ class CreateScreen extends Component {
                         hintText="Playlist Expiry Date"
                         onChange={this.handleDateChange.bind(this)}
                     />
-                    <Button
-                        style={buttonStyles}
-                        text='Create'
-                        onClick={this.handleCreateButtonClick.bind(this)}
-                    />
+                    <div className='Form-button-container'>
+                        <RaisedButton
+                            style={buttonStyles}
+                            label='Create'
+                            onClick={this.handleCreateButtonClick.bind(this)}
+                            disabled={!this.state.playlistDateEntered}
+                        />
+                    </div>
                 </div>
             </div>
         );

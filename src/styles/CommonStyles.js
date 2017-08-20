@@ -1,4 +1,4 @@
-const ConfirmScreenStyles = {
+const CommonStyles = {
     buttonStyle: {
         marginBottom: 24,
         width: 256
@@ -9,4 +9,4 @@ const ConfirmScreenStyles = {
     }
 };
 
-export { ConfirmScreenStyles };
+export { CommonStyles };

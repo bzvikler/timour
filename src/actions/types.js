@@ -10,5 +10,6 @@ export const PLAYLIST_DATE_TO_LIVE_CHANGE = 'playlist_date_to_live_change';
 export const CONFIRM_PLAYLIST = 'confirm_playlist';
 export const NAV_TO_CONFIRM = 'nav_to_confirm';
 export const NAV_TO_PLAYLIST = 'nav_to_playlist';
+export const PLAYLIST_EDIT_CODE_CAHANGE = 'playlist_edit_code_change';
 
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Button } from './common';
 
 class StartScreen extends Component {
     render() {

@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PlaylistService from '../services/PlaylistService';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import TextField from 'material-ui/TextField';
-import { Button } from './common';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 import { ConfirmScreenStyles } from '../styles';
 import {
-    playlistNameChange,
-    djNameChange,
-    playlistDateToLiveChange,
-    createPlaylist
+    confirmPlaylist,
+    playlistEditCodeChange
 } from '../actions/PlaylistActions';
 
 class ConfirmScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            snackIsOpen: false
+            snackIsOpen: false,
+            hasCopiedPlaylistId: false
         }
     }
 
-    handleButtonPress() {
+    hasCopiedText() {
         this.setState({
-            snackIsOpen: true
+            snackIsOpen: true,
+            hasCopiedPlaylistId: true
         });
     }
 
@@ -33,29 +34,47 @@ class ConfirmScreen extends Component {
         });
     }
 
+    handlePlaylistEditCodeChange(e, playlistEditCode) {
+        this.props.playlistEditCodeChange(playlistEditCode);
+    }
+
+    confirmPlaylist() {
+        this.props.confirmPlaylist({
+            playlistId: this.props.playlistId,
+            playlistEditCode: this.props.playlistEditCode
+        });
+    }
+
     render() {
         const { buttonStyle, textFieldStyle } = ConfirmScreenStyles;
 
         return (
             <div className='Screen-container'>
                 <div className='Form-center'>
-                    <h2>Great! Here's your DJ ID, <br /> save this to edit your playlist later!</h2>
+                    <h2>Great! Enter your Edit Code<br /> you'll need it later to edit your playlist!</h2>
                     <TextField
                         style={textFieldStyle}
-                        inputStyle={{ textAlign: 'center'}}
-                        id="text-field-default"
-                        defaultValue={this.props.djId}
-                        value={this.props.djId}
+                        hintText="My Secret DJ Code"
+                        floatingLabelText="Playlist Edit Code"
+                        onChange={this.handlePlaylistEditCodeChange.bind(this)}
                     />
-                    <RaisedButton
-                        style={buttonStyle}
-                        label='Copy Id'
-                         onClick={this.handleButtonPress.bind(this)}
-                    />
-                    <RaisedButton
-                        style={buttonStyle}
-                        label='See Your Playlist'
-                    />
+                    <div className='Form-button-container'>
+                        <CopyToClipboard
+                            text={this.props.playlistEditCode}
+                            onCopy={this.hasCopiedText.bind(this)}
+                        >
+                            <RaisedButton
+                                style={buttonStyle}
+                                label='Copy Id'
+                            />
+                        </CopyToClipboard>
+                        <RaisedButton
+                            style={buttonStyle}
+                            disabled={!this.state.hasCopiedPlaylistId}
+                            label='See Your Playlist'
+                            onClick={this.confirmPlaylist.bind(this)}
+                        />
+                    </div>
                 </div>
                 <Snackbar
                     open={this.state.snackIsOpen}
@@ -69,12 +88,18 @@ class ConfirmScreen extends Component {
 }
 
 const mapStateToProps = ({ playlist }) => {
-    const { djId } = playlist;
+    const {
+        playlistId,
+        playlistEditCode
+    } = playlist;
 
     return {
-        djId
+        playlistId,
+        playlistEditCode
     };
 };
 
 export default connect(mapStateToProps, {
+    confirmPlaylist,
+    playlistEditCodeChange
 })(ConfirmScreen);
